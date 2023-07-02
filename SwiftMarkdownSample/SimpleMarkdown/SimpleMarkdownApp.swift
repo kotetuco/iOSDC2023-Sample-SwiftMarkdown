@@ -2,7 +2,7 @@
 //  SimpleMarkdownApp.swift
 //  SimpleMarkdown
 //
-//  Created by Toru Kuriyama on 2023/07/01.
+//  Created by kotetu on 2023/07/01.
 //
 
 import SwiftUI

@@ -2,20 +2,29 @@
 //  ContentView.swift
 //  SimpleMarkdown
 //
-//  Created by Toru Kuriyama on 2023/07/01.
+//  Created by kotetu on 2023/07/01.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    private let simpleMarkdown =
+"""
+# Title
+**iOS**DC _Japan_ `2023`
+"""
+
+    @State var paragraphs: [MarkdownParagraph] = []
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            MarkdownPreviewView(paragraphs: $paragraphs)
+            Spacer()
         }
-        .padding()
+        .padding(8)
+        .onAppear {
+            paragraphs = SimpleMarkdownParser().parseAndDebug(with: simpleMarkdown)
+        }
     }
 }
 
