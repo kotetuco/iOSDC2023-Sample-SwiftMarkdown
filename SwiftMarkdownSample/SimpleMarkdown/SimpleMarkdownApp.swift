@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+let sampleMarkdown =
+"""
+# Title
+**iOS**DC _Japan_ `2023`
+"""
+
 @main
 struct SimpleMarkdownApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(sourceText: sampleMarkdown)
         }
     }
 }

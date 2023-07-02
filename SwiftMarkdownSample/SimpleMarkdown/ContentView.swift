@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let simpleMarkdown =
-"""
-# Title
-**iOS**DC _Japan_ `2023`
-"""
-
     @State var paragraphs: [MarkdownParagraph] = []
+    let sourceText: String
 
     var body: some View {
         VStack {
@@ -23,13 +18,13 @@ struct ContentView: View {
         }
         .padding(8)
         .onAppear {
-            paragraphs = SimpleMarkdownParser().parseAndDebug(with: simpleMarkdown)
+            paragraphs = SimpleMarkdownParser().parseAndDebug(with: sourceText)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(sourceText: sampleMarkdown)
     }
 }
