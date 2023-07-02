@@ -11,10 +11,18 @@ struct MarkdownPreviewView: View {
     @Binding var paragraphs: [MarkdownParagraph]
 
     var body: some View {
+        ParagraphViewGroup(paragraphs: $paragraphs)
+    }
+}
+
+struct ParagraphViewGroup: View {
+    @Binding var paragraphs: [MarkdownParagraph]
+
+    var body: some View {
         ForEach($paragraphs) { paragraph in
             VStack {
                 HStack(spacing: 2) {
-                    MarkdownParagraphView(paragraph: paragraph)
+                    ParagraphView(paragraph: paragraph)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -23,7 +31,7 @@ struct MarkdownPreviewView: View {
     }
 }
 
-struct MarkdownParagraphView: View {
+struct ParagraphView: View {
     @Binding var paragraph: MarkdownParagraph
 
     var body: some View {
@@ -34,12 +42,12 @@ struct MarkdownParagraphView: View {
                 .font(.largeTitle)
                 .fontWeight(.heavy)
         case .textParagraph:
-            MarkdownElementViews(elements: $paragraph.elements)
+            ElementViewGroup(elements: $paragraph.elements)
         }
     }
 }
 
-struct MarkdownElementViews: View {
+struct ElementViewGroup: View {
     @Binding var elements: [MarkdownElement]
 
     var body: some View {
@@ -67,10 +75,14 @@ struct MarkdownElementViews: View {
 
 struct MarkdownPreviewView_Previews: PreviewProvider {
     @State static var paragraphs: [MarkdownParagraph] = [
-        MarkdownParagraph(elements: [], type: .heading(planeText: "Title", level: 1))
+        MarkdownParagraph(elements: [], type: .heading(planeText: "Title", level: 1)),
+        MarkdownParagraph(elements: [MarkdownElement(type: .text(planeText: "iOSDC Japan 2023"))], type: .textParagraph)
     ]
 
     static var previews: some View {
-        MarkdownPreviewView(paragraphs: $paragraphs)
+        VStack {
+            MarkdownPreviewView(paragraphs: $paragraphs)
+            Spacer()
+        }
     }
 }

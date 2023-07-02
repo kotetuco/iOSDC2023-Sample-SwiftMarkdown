@@ -76,6 +76,7 @@ struct SimpleMarkdownParser {
             case let emphasis as Emphasis:
                 return MarkdownElement(type: .emphasis(planeText: emphasis.plainText))
             case let inlineCode as InlineCode:
+                // inlineCode.plainTextだと前後の"`"も含んだ文字列が取得されてしまうので注意
                 return MarkdownElement(type: .inlineCode(planeText: inlineCode.code))
             default:
                 // 未サポートの要素
